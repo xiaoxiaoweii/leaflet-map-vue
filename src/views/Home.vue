@@ -1,5 +1,13 @@
 <template>
-  <div id="map"></div>
+  <div class="wrapper">
+    <div id="map"></div>
+    <div class="other_btn">
+      <div class="latlng">
+        <div class="other_lat">{{ latNum }}</div>
+        <div class="other_lon">{{ lonNum }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -8,7 +16,11 @@ export default {
   name: "Home",
   components: {},
   data() {
-    return {};
+    return {
+      // 经纬数据
+      latNum: 0,
+      lonNum: 0,
+    };
   },
   mounted() {
     this.$nextTick(() => {
@@ -32,22 +44,50 @@ export default {
       map.setView([30.2, 119.7], 5);
       window.map = map;
       this.setTileLayer();
-      L.latlngGraticule({
-        showLabel: true,
-        dashArray: [4, 4],
-        fontColor: "#999999",
-        zoomInterval: constants.graticule_zoom,
-      }).addTo(map);
+      this.setLatlngGraticule();
+      this.changeZoom();
+      this.changeMove();
+      // 经纬度显示
+      this.showLatlon();
+    },
+    showLatlon() {
+      window.map.on("mousemove", (e) => {
+        let latlng = L.latLng(e.latlng.lat, e.latlng.lng).wrap();
+        this.latNum =
+          latlng.lat > 0
+            ? Math.abs(latlng.lat).toFixed(3) + " N"
+            : Math.abs(latlng.lat).toFixed(3) + " S";
+        this.lonNum =
+          latlng.lng > 0
+            ? Math.abs(latlng.lng).toFixed(3) + " E"
+            : Math.abs(latlng.lng).toFixed(3) + " W";
+      });
     },
     async setLatlngGraticule() {
       await L.latlngGraticule({
-        showLabel: false,
+        showLabel: true,
         dashArray: [1, 1],
-        fontColor: "#fff000",
-        zoomInterval: window.graticule_zoom,
-      }).addTo(window.map);
+        fontColor: "#999000",
+        zoomInterval: constants.graticule_zoom,
+      }).addTo(map);
     },
-
+    changeZoom() {
+      window.map.on("zoomend", (ev) => {
+        console.log("zoomend", window.map.getZoom());
+        console.log(ev);
+      });
+    },
+    changeMove() {
+      window.map.on("moveend", (ev) => {
+        console.log(
+          "moveend",
+          window.map.getZoom(),
+          window.map.getCenter(),
+          window.map.getBounds()
+        );
+        console.log(ev);
+      });
+    },
     setTileLayer() {
       window.constants.tileLayer.vec.addTo(map);
       window.constants.tileLayer.cva.addTo(map);
@@ -56,10 +96,34 @@ export default {
 };
 </script>
 <style>
-#map {
+.wrapper #map {
   padding: 0;
   margin: 0;
   width: 100%;
   height: calc(100vh);
+}
+.other_btn {
+  z-index: 1000;
+  position: fixed;
+  bottom: 20px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  background-size: 100%;
+  padding-left: 10px;
+  margin-right: 10px;
+}
+.other_btn .latlng {
+  width: 250px;
+  display: flex;
+  align-items: center;
+}
+.other_btn .latlng div {
+  width: 80px;
+  margin-left: 5px;
+}
+.other_btn .latlng .other_lat,
+.other_btn .latlng  .other_lon {
+  font-weight: 500;
 }
 </style>

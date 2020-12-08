@@ -96,11 +96,13 @@ export default {
 };
 </script>
 <style lang="scss" style>
-.wrapper #map {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: calc(100vh);
+.wrapper {
+  #map {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: calc(100vh);
+  }
   .other_btn {
     z-index: 1000;
     position: fixed;

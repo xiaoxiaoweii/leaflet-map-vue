@@ -95,35 +95,37 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss" style>
 .wrapper #map {
   padding: 0;
   margin: 0;
   width: 100%;
   height: calc(100vh);
-}
-.other_btn {
-  z-index: 1000;
-  position: fixed;
-  bottom: 20px;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  background-size: 100%;
-  padding-left: 10px;
-  margin-right: 10px;
-}
-.other_btn .latlng {
-  width: 250px;
-  display: flex;
-  align-items: center;
-}
-.other_btn .latlng div {
-  width: 80px;
-  margin-left: 5px;
-}
-.other_btn .latlng .other_lat,
-.other_btn .latlng  .other_lon {
-  font-weight: 500;
+  .other_btn {
+    z-index: 1000;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    background-size: 100%;
+    padding-left: 10px;
+    margin-right: 10px;
+    .latlng {
+      width: 250px;
+      display: flex;
+      align-items: center;
+      div {
+        width: 80px;
+        margin-left: 5px;
+      }
+      .other_lat {
+        font-weight: 500;
+      }
+      .other_lon {
+        font-weight: 500;
+      }
+    }
+  }
 }
 </style>

@@ -68,7 +68,7 @@ export default {
         showLabel: true,
         dashArray: [1, 1],
         fontColor: "#999000",
-        zoomInterval: constants.graticule_zoom,
+        zoomInterval: this.$constants.graticule_zoom,
       }).addTo(map);
     },
     changeZoom() {
@@ -89,8 +89,8 @@ export default {
       });
     },
     setTileLayer() {
-      window.constants.tileLayer.vec.addTo(map);
-      window.constants.tileLayer.cva.addTo(map);
+      this.$constants.tileLayer.vec.addTo(map);
+      this.$constants.tileLayer.cva.addTo(map);
     },
   },
 };

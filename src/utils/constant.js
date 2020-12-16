@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as L from 'leaflet'
 export const constants = {
+  // 经纬度网格设置
   graticule_zoom: [
     {
       start: 2,
@@ -53,6 +54,7 @@ export const constants = {
       interval: 0.0625,
     },
   ],
+  // 底图列表
   tileLayer: {
     vec: L.tileLayer(
       "http://{s}.tianditu.gov.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILEMATRIX={z}&TILECOL={x}&TILEROW={y}&tk=c77ff55fbeec6f05de4685b93f816b9a",
@@ -69,4 +71,32 @@ export const constants = {
       }
     ),
   },
+  // 工具栏列表
+  toolList: [
+    {
+      name: "measure",
+      src: require("@/assets/images/measure.svg"),
+      activeSrc: require("@/assets/images/measure_active.svg"),
+    },
+    {
+      name: "area",
+      src: require("@/assets/images/area.svg"),
+      activeSrc: require("@/assets/images/area_active.svg"),
+    },
+    {
+      name: "grid",
+      src: require("@/assets/images/grid.svg"),
+      activeSrc: require("@/assets/images/grid_active.svg"),
+    },
+    {
+      name: "Basemap",
+      src: require("@/assets/images/Basemap.svg"),
+      activeSrc: require("@/assets/images/Basemap_active.svg"),
+    },
+    {
+      name: "screenshot",
+      src: require("@/assets/images/screenshot.svg"),
+      activeSrc: require("@/assets/images/screenshot_active.svg"),
+    },
+  ],
 };
